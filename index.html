@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robert J. Haldeman — College Tuition Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#ffffff;
+  --bg-alt:#f7f7f5;
+  --bg-card:#ffffff;
+  --text:#1a1a1a;
+  --text-secondary:#4a4a4a;
+  --text-tertiary:#7a7a7a;
+  --accent:#1a3a5c;
+  --accent-light:#2b5a8a;
+  --border:#e2e2de;
+  --border-light:#ededeb;
+  --highlight:#f0f4f8;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'EB Garamond',Georgia,serif;
+  line-height:1.8;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:#d0dce8;color:var(--text)}
+
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 2rem;
+}
+.nav-inner{
+  max-width:960px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  height:54px;
+}
+.nav-brand{
+  font-family:'EB Garamond',serif;font-weight:600;
+  font-size:1.05rem;color:var(--text);
+  text-decoration:none;letter-spacing:.01em;
+}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{
+  color:var(--text-tertiary);text-decoration:none;font-size:.78rem;
+  letter-spacing:.08em;text-transform:uppercase;
+  font-family:'Inter',sans-serif;font-weight:500;
+  transition:color .2s;
+}
+.nav-links a:hover{color:var(--accent)}
+
+.hero{
+  padding:9rem 2rem 5rem;
+  max-width:720px;margin:0 auto;
+  border-bottom:1px solid var(--border);
+}
+.hero-tag{
+  font-family:'Inter',sans-serif;font-size:.7rem;font-weight:600;
+  color:var(--accent);letter-spacing:.14em;text-transform:uppercase;
+  margin-bottom:1.4rem;
+}
+.hero h1{
+  font-family:'EB Garamond',serif;font-weight:500;
+  font-size:clamp(2rem,4.4vw,2.9rem);
+  line-height:1.22;color:var(--text);
+  margin-bottom:1.4rem;
+  letter-spacing:-.01em;
+}
+.hero-sub{
+  font-size:1.12rem;color:var(--text-secondary);
+  line-height:1.75;margin-bottom:2.2rem;
+  max-width:600px;
+}
+.hero-meta{
+  display:flex;gap:2rem;flex-wrap:wrap;
+  font-size:.78rem;color:var(--text-tertiary);
+  font-family:'Inter',sans-serif;font-weight:400;
+  padding-top:1.2rem;border-top:1px solid var(--border-light);
+}
+.hero-meta span{display:flex;align-items:center;gap:.5rem}
+
+.section{
+  max-width:720px;margin:0 auto;
+  padding:3.5rem 2rem;
+}
+.section + .section{border-top:1px solid var(--border-light)}
+.section-label{
+  font-family:'Inter',sans-serif;font-size:.68rem;font-weight:600;
+  color:var(--accent);letter-spacing:.12em;text-transform:uppercase;
+  margin-bottom:.5rem;
+}
+.section h2{
+  font-family:'EB Garamond',serif;font-weight:500;
+  font-size:clamp(1.5rem,2.8vw,1.9rem);
+  color:var(--text);margin-bottom:1.4rem;
+  line-height:1.28;letter-spacing:-.005em;
+}
+.section h3{
+  font-family:'EB Garamond',serif;font-weight:600;
+  font-size:1.18rem;color:var(--text);
+  margin:2.2rem 0 .8rem;line-height:1.35;
+}
+.section p{
+  margin-bottom:1.2rem;color:var(--text-secondary);
+  font-size:1.05rem;
+}
+.section p strong{color:var(--text);font-weight:600}
+
+.abstract-box{
+  background:var(--bg-alt);
+  border-left:3px solid var(--accent);
+  padding:1.8rem 2rem;
+  margin:1.6rem 0;
+}
+.abstract-box .label{
+  font-family:'Inter',sans-serif;font-size:.65rem;font-weight:600;
+  color:var(--accent);letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:.7rem;
+}
+.abstract-box p{font-size:1rem;margin-bottom:.8rem}
+.abstract-box p:last-child{margin-bottom:0}
+
+.equation-block{
+  background:var(--bg-alt);
+  border:1px solid var(--border-light);
+  padding:1.2rem 1.8rem;
+  margin:1.5rem 0;
+  text-align:center;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.88rem;
+  color:var(--text);
+  overflow-x:auto;
+}
+
+.findings-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:1px;margin:1.8rem 0;
+  background:var(--border);
+  border:1px solid var(--border);
+}
+.finding-card{
+  background:var(--bg-card);
+  padding:1.5rem;
+}
+.finding-card .metric{
+  font-family:'EB Garamond',serif;
+  font-size:1.7rem;font-weight:500;
+  color:var(--accent);
+  margin-bottom:.2rem;
+}
+.finding-card .metric-label{
+  font-size:.68rem;color:var(--text-tertiary);
+  font-family:'Inter',sans-serif;font-weight:600;
+  text-transform:uppercase;letter-spacing:.08em;
+  margin-bottom:.5rem;
+}
+.finding-card p{
+  font-size:.88rem;color:var(--text-tertiary);line-height:1.5;
+  margin:0;
+}
+
+/* Regression table */
+.reg-table-wrap{margin:2rem 0;overflow-x:auto}
+.reg-table{
+  width:100%;border-collapse:collapse;
+  font-family:'Inter',sans-serif;font-size:.82rem;
+}
+.reg-table th{
+  text-align:left;padding:.6rem .8rem;
+  border-bottom:2px solid var(--text);
+  font-weight:600;color:var(--text);
+  font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;
+}
+.reg-table th.spec-col{text-align:center;min-width:70px}
+.reg-table td{
+  padding:.45rem .8rem;
+  border-bottom:1px solid var(--border-light);
+  color:var(--text-secondary);
+  vertical-align:top;
+}
+.reg-table td.spec-val{text-align:center;font-family:'IBM Plex Mono',monospace;font-size:.8rem}
+.reg-table td.var-name{font-weight:500;color:var(--text);min-width:180px}
+.reg-table tr.se-row td{
+  border-bottom:none;padding-top:0;
+  color:var(--text-tertiary);font-size:.78rem;
+}
+.reg-table tr.gap-row td{padding:.3rem .8rem;border-bottom:none}
+.reg-table tfoot td{
+  border-top:2px solid var(--text);
+  border-bottom:none;
+  font-size:.78rem;color:var(--text-tertiary);
+  padding:.5rem .8rem;
+}
+.sig{font-weight:600;color:var(--accent)}
+
+/* Bar chart */
+.bar-chart{margin:2rem 0}
+.bar-row{
+  display:flex;align-items:center;gap:.8rem;
+  margin-bottom:.7rem;
+}
+.bar-label{
+  font-family:'Inter',sans-serif;font-size:.78rem;
+  color:var(--text-secondary);width:110px;text-align:right;
+  flex-shrink:0;
+}
+.bar-track{flex:1;height:28px;background:var(--bg-alt);position:relative;border-radius:2px}
+.bar-fill{
+  height:100%;background:var(--accent);border-radius:2px;
+  display:flex;align-items:center;justify-content:flex-end;
+  padding-right:.6rem;
+  font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:#fff;font-weight:500;
+  transition:width .8s ease;
+}
+.bar-sig{
+  font-family:'Inter',sans-serif;font-size:.7rem;
+  color:var(--text-tertiary);width:70px;flex-shrink:0;
+}
+
+.caption{
+  font-family:'Inter',sans-serif;font-size:.8rem;
+  color:var(--text-tertiary);line-height:1.55;
+  margin-top:.6rem;
+}
+.caption strong{color:var(--text-secondary);font-weight:600}
+
+.data-sources{
+  background:var(--bg-alt);
+  padding:1.2rem 1.5rem;
+  margin:1.5rem 0;
+  font-family:'Inter',sans-serif;
+  font-size:.82rem;color:var(--text-tertiary);
+  line-height:1.6;
+}
+.data-sources strong{color:var(--text-secondary)}
+
+.ref-list{list-style:none;counter-reset:ref}
+.ref-list li{
+  position:relative;padding-left:1.8rem;
+  margin-bottom:.9rem;
+  font-size:.92rem;color:var(--text-secondary);
+  line-height:1.6;
+}
+.ref-list li::before{
+  counter-increment:ref;
+  content:counter(ref) ".";
+  position:absolute;left:0;
+  font-family:'Inter',sans-serif;
+  font-size:.75rem;color:var(--text-tertiary);
+  font-weight:600;top:.12rem;
+}
+.ref-list li a{color:var(--accent-light);text-decoration:none}
+.ref-list li a:hover{text-decoration:underline}
+
+.footer{
+  text-align:center;padding:3rem 2rem;
+  border-top:1px solid var(--border);
+  font-size:.75rem;color:var(--text-tertiary);
+  font-family:'Inter',sans-serif;
+}
+
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:640px){
+  .hero-meta{flex-direction:column;gap:.6rem}
+  .findings-grid{grid-template-columns:1fr}
+  .section{padding:2.5rem 1.2rem}
+  .nav-links{gap:1rem}
+  .nav-links a{font-size:.7rem}
+  .bar-label{width:80px;font-size:.7rem}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">Robert J. Haldeman</a>
+    <ul class="nav-links">
+      <li><a href="#abstract">Abstract</a></li>
+      <li><a href="#findings">Findings</a></li>
+      <li><a href="#methodology">Methods</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#references">References</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero fade-in">
+  <div class="hero-tag">Academic Research &middot; Panel Econometrics</div>
+  <h1>The Cost-Shifting Hypothesis: Do Cuts in State Appropriations Drive Tuition Increases at Public Universities?</h1>
+  <p class="hero-sub">A 50-state panel data analysis testing whether reductions in per-student state funding are passed through to students as higher net tuition revenue.</p>
+  <div class="hero-meta">
+    <span>Robert J. Haldeman</span>
+    <span>March 2026</span>
+    <span>2002&ndash;2024 Analysis</span>
+    <span>OLS &middot; Fixed Effects &middot; Clustered SE</span>
+  </div>
+</section>
+
+<section class="section fade-in" id="abstract">
+  <div class="section-label">Section I</div>
+  <h2>Abstract</h2>
+  <div class="abstract-box">
+    <div class="label">Summary</div>
+    <p>This study tests the cost-shifting hypothesis&mdash;whether cuts in state appropriations per full-time equivalent (FTE) student lead to increases in net tuition revenue at public universities&mdash;using a panel dataset covering all 50 U.S. states from fiscal year 2002 to 2024 (1,150 observations). Nine OLS regression specifications are estimated, progressing from pooled OLS through state and year fixed effects with standard errors clustered by state.</p>
+    <p>The preferred specification (state fixed effects) yields a cost-shifting coefficient of &minus;0.2532 (p&nbsp;=&nbsp;0.001), indicating that for every $1,000 per-student cut in state appropriations, net tuition revenue rises by approximately $253. This estimate is statistically significant across all nine specifications and falls squarely within the 25&ndash;50 percent pass-through range identified in the published literature. Per capita personal income emerges as the single strongest predictor of tuition levels, and state fixed effects nearly double the model&rsquo;s explanatory power from R&sup2;&nbsp;=&nbsp;0.50 to R&sup2;&nbsp;=&nbsp;0.72.</p>
+  </div>
+</section>
+
+<section class="section fade-in" id="findings">
+  <div class="section-label">Section II</div>
+  <h2>Key Findings</h2>
+  <div class="findings-grid">
+    <div class="finding-card">
+      <div class="metric">+$253</div>
+      <div class="metric-label">Per $1,000 Cut</div>
+      <p>For every $1,000 reduction in per-student state appropriations, net tuition revenue rises by approximately $253 (state FE, clustered SE).</p>
+    </div>
+    <div class="finding-card">
+      <div class="metric">0.72</div>
+      <div class="metric-label">R&sup2; (State FE)</div>
+      <p>State fixed effects nearly double the model&rsquo;s explanatory power, capturing 72% of within-state variation in tuition.</p>
+    </div>
+    <div class="finding-card">
+      <div class="metric">+$183</div>
+      <div class="metric-label">Income Effect per $1K</div>
+      <p>For every $1,000 increase in state per capita personal income, tuition rises by $183. Wealthier states charge more.</p>
+    </div>
+    <div class="finding-card">
+      <div class="metric">1,150</div>
+      <div class="metric-label">Panel Observations</div>
+      <p>All 50 U.S. states across 23 fiscal years (2002&ndash;2024), assembled from SHEEO, FRED, and BEA sources.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section fade-in" id="introduction">
+  <div class="section-label">Section III</div>
+  <h2>Introduction</h2>
+  <p>Rising tuition at public universities is among the most persistent concerns in American higher education policy. Between 2002 and 2024, average net tuition revenue per FTE student at public institutions increased substantially, while real state appropriations per student declined in many states&mdash;particularly in the aftermath of the 2008 financial crisis.</p>
+  <p>The <strong>cost-shifting hypothesis</strong> posits that public universities compensate for reductions in state funding by raising tuition, effectively transferring the financial burden from state taxpayers to students and their families. This relationship has been examined extensively in the economics of education literature, with estimates of the pass-through rate typically ranging from 25 to 50 cents per dollar cut.</p>
+  <p>This study independently replicates and extends this analysis using a comprehensive panel dataset assembled from primary sources. By estimating nine progressively controlled regression specifications&mdash;from simple pooled OLS through two-way fixed effects with clustered standard errors&mdash;the analysis provides a thorough examination of the robustness and magnitude of the cost-shifting relationship across different econometric frameworks.</p>
+</section>
+
+<section class="section fade-in" id="methodology">
+  <div class="section-label">Section IV</div>
+  <h2>Data and Methodology</h2>
+  
+  <h3>Data Sources</h3>
+  <p>The dataset is a balanced panel of all 50 U.S. states from fiscal year 2002 to 2024, comprising 1,150 state-year observations. The primary data source is the <strong>SHEEO State Higher Education Finance (SHEF) Report</strong>, which provides net tuition revenue per FTE (dependent variable), education appropriations per FTE (key independent variable), and FTE enrollment. Control variables&mdash;state unemployment rate and per capita personal income&mdash;are sourced from <strong>FRED</strong> (Bureau of Labor Statistics) and the <strong>Bureau of Economic Analysis</strong>, respectively. State population data is drawn from the U.S. Census Bureau.</p>
+
+  <h3>Variables</h3>
+  <div class="data-sources">
+    <strong>Dependent Variable:</strong> Net Tuition Revenue per FTE&mdash;the actual tuition burden on students after institutional and state financial aid.<br>
+    <strong>Key Independent Variable:</strong> Education Appropriations per FTE&mdash;state and local funding allocated per full-time equivalent student.<br>
+    <strong>Controls:</strong> State Unemployment Rate, Net FTE Enrollment, Per Capita Personal Income, State Population.
+  </div>
+  
+  <h3>Econometric Specification</h3>
+  <p>The baseline pooled OLS model estimates the following equation, with controls added progressively across five specifications:</p>
+  <div class="equation-block">
+    NetTuition<sub>it</sub> = &beta;<sub>0</sub> + &beta;<sub>1</sub> &middot; Appropriations<sub>it</sub> + &gamma;X<sub>it</sub> + &epsilon;<sub>it</sub>
+  </div>
+  <p>Specifications 6 through 9 introduce state fixed effects, year fixed effects, and two-way fixed effects to absorb unobserved heterogeneity. All fixed-effects specifications use standard errors clustered at the state level to account for within-state serial correlation:</p>
+  <div class="equation-block">
+    NetTuition<sub>it</sub> = &beta;<sub>1</sub> &middot; Appropriations<sub>it</sub> + &gamma;X<sub>it</sub> + &alpha;<sub>i</sub> + &delta;<sub>t</sub> + &epsilon;<sub>it</sub>
+  </div>
+  <p>Where &alpha;<sub>i</sub> captures time-invariant state characteristics (political culture, institutional history, geographic factors) and &delta;<sub>t</sub> absorbs national-level trends (inflation, federal policy changes).</p>
+</section>
+
+<section class="section fade-in" id="results">
+  <div class="section-label">Section V</div>
+  <h2>Results</h2>
+  
+  <h3>Pooled OLS Specifications (1&ndash;5)</h3>
+  <p>The progressive addition of control variables reveals the importance of a fully specified model. In the bivariate specification (1), education appropriations alone explains almost no variation in tuition (R&sup2;&nbsp;=&nbsp;0.004), though the coefficient is negative and significant. Adding the unemployment rate in specification (2) raises R&sup2; to 0.067. The critical turning point arrives with <strong>per capita personal income</strong> in specification (4), which quintuples the model&rsquo;s explanatory power to R&sup2;&nbsp;=&nbsp;0.494.</p>
+  <p>In the fully controlled pooled OLS model (specification 5), the appropriations coefficient is <strong>&minus;0.49</strong> and significant at the 1% level (p&nbsp;&lt;&nbsp;0.001), with clustered standard errors. This means roughly 49 cents of every dollar cut from per-student appropriations is passed on to students through higher tuition.</p>
+
+  <div class="reg-table-wrap">
+    <table class="reg-table">
+      <thead>
+        <tr>
+          <th>Variable</th>
+          <th class="spec-col">(1)</th>
+          <th class="spec-col">(2)</th>
+          <th class="spec-col">(3)</th>
+          <th class="spec-col">(4)</th>
+          <th class="spec-col">(5)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="var-name">Educ. Appropriations / FTE</td>
+          <td class="spec-val"><span class="sig">&minus;0.065**</span></td>
+          <td class="spec-val"><span class="sig">&minus;0.084***</span></td>
+          <td class="spec-val"><span class="sig">&minus;0.084***</span></td>
+          <td class="spec-val"><span class="sig">&minus;0.497***</span></td>
+          <td class="spec-val"><span class="sig">&minus;0.490***</span></td>
+        </tr>
+        <tr>
+          <td class="var-name">Unemployment Rate</td>
+          <td class="spec-val">&mdash;</td>
+          <td class="spec-val"><span class="sig">&minus;399***</span></td>
+          <td class="spec-val"><span class="sig">&minus;387***</span></td>
+          <td class="spec-val">&minus;71.7</td>
+          <td class="spec-val">&minus;73.2</td>
+        </tr>
+        <tr>
+          <td class="var-name">Net FTE Enrollment</td>
+          <td class="spec-val">&mdash;</td>
+          <td class="spec-val">&mdash;</td>
+          <td class="spec-val"><span class="sig">neg.***</span></td>
+          <td class="spec-val">insig.</td>
+          <td class="spec-val">insig.</td>
+        </tr>
+        <tr>
+          <td class="var-name">Per Capita Personal Income</td>
+          <td class="spec-val">&mdash;</td>
+          <td class="spec-val">&mdash;</td>
+          <td class="spec-val">&mdash;</td>
+          <td class="spec-val"><span class="sig">+0.200***</span></td>
+          <td class="spec-val"><span class="sig">+0.183***</span></td>
+        </tr>
+        <tr>
+          <td class="var-name">State Population</td>
+          <td class="spec-val">&mdash;</td>
+          <td class="spec-val">&mdash;</td>
+          <td class="spec-val">&mdash;</td>
+          <td class="spec-val">&mdash;</td>
+          <td class="spec-val"><span class="sig">neg.***</span></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>R&sup2;</td>
+          <td class="spec-val">0.004</td>
+          <td class="spec-val">0.067</td>
+          <td class="spec-val">0.092</td>
+          <td class="spec-val">0.494</td>
+          <td class="spec-val">0.501</td>
+        </tr>
+        <tr>
+          <td>Observations</td>
+          <td class="spec-val" colspan="5">1,150</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <p class="caption"><strong>Table 1.</strong> Pooled OLS regression results. Specifications progressively add controls. *** p&lt;0.01, ** p&lt;0.05, * p&lt;0.10. Specification 5 uses standard errors clustered by state.</p>
+
+  <h3>Fixed Effects Specifications (6&ndash;9)</h3>
+  <p>Introducing <strong>state fixed effects</strong> (specification 7) absorbs all time-invariant differences between states and produces the preferred estimate: a cost-shifting coefficient of <strong>&minus;0.2532</strong> (p&nbsp;=&nbsp;0.001). The within R&sup2; jumps to 0.72, meaning the model explains 72% of within-state variation in tuition. Per capita income remains strongly significant at +0.183.</p>
+  <p><strong>Year fixed effects</strong> alone (specification 8) produce a coefficient of &minus;0.473 (p&nbsp;&lt;&nbsp;0.001). The most conservative specification&mdash;<strong>two-way fixed effects</strong> (specification 9)&mdash;yields a coefficient of &minus;0.132, still significant at the 5% level (p&nbsp;=&nbsp;0.03). Income loses significance in this specification as year fixed effects absorb national income growth trends.</p>
+
+  <div class="reg-table-wrap">
+    <table class="reg-table">
+      <thead>
+        <tr>
+          <th>Variable</th>
+          <th class="spec-col">(6) Clust. SE</th>
+          <th class="spec-col">(7) State FE</th>
+          <th class="spec-col">(8) Year FE</th>
+          <th class="spec-col">(9) Two-Way FE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="var-name">Educ. Appropriations / FTE</td>
+          <td class="spec-val"><span class="sig">&minus;0.490***</span></td>
+          <td class="spec-val"><span class="sig">&minus;0.253***</span></td>
+          <td class="spec-val"><span class="sig">&minus;0.473***</span></td>
+          <td class="spec-val"><span class="sig">&minus;0.132**</span></td>
+        </tr>
+        <tr>
+          <td class="var-name">Per Capita Personal Income</td>
+          <td class="spec-val"><span class="sig">+0.183***</span></td>
+          <td class="spec-val"><span class="sig">+0.183***</span></td>
+          <td class="spec-val"><span class="sig">+0.183***</span></td>
+          <td class="spec-val">insig.</td>
+        </tr>
+        <tr>
+          <td class="var-name">State Fixed Effects</td>
+          <td class="spec-val">No</td>
+          <td class="spec-val">Yes</td>
+          <td class="spec-val">No</td>
+          <td class="spec-val">Yes</td>
+        </tr>
+        <tr>
+          <td class="var-name">Year Fixed Effects</td>
+          <td class="spec-val">No</td>
+          <td class="spec-val">No</td>
+          <td class="spec-val">Yes</td>
+          <td class="spec-val">Yes</td>
+        </tr>
+        <tr>
+          <td class="var-name">Clustered SE (State)</td>
+          <td class="spec-val">Yes</td>
+          <td class="spec-val">Yes</td>
+          <td class="spec-val">Yes</td>
+          <td class="spec-val">Yes</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>R&sup2;</td>
+          <td class="spec-val">0.501</td>
+          <td class="spec-val">0.72</td>
+          <td class="spec-val">&mdash;</td>
+          <td class="spec-val">&mdash;</td>
+        </tr>
+        <tr>
+          <td>Observations</td>
+          <td class="spec-val" colspan="4">1,150</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <p class="caption"><strong>Table 2.</strong> Fixed effects specifications. All models include the full set of controls. *** p&lt;0.01, ** p&lt;0.05. Standard errors clustered at the state level.</p>
+
+  <h3>Coefficient Comparison Across Specifications</h3>
+  <p>The cost-shifting coefficient is statistically significant across all nine specifications, ranging from $132 to $490 per $1,000 cut in per-student appropriations. This range maps closely onto the 25&ndash;50 percent pass-through rate identified in the broader literature.</p>
+
+  <div class="bar-chart">
+    <div class="bar-row">
+      <div class="bar-label">Pooled OLS</div>
+      <div class="bar-track"><div class="bar-fill" style="width:100%">&minus;$490</div></div>
+      <div class="bar-sig">*** p&lt;.01</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">Year FE</div>
+      <div class="bar-track"><div class="bar-fill" style="width:96.5%">&minus;$473</div></div>
+      <div class="bar-sig">*** p&lt;.01</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">State FE</div>
+      <div class="bar-track"><div class="bar-fill" style="width:51.6%;background:var(--accent-light)">&minus;$253</div></div>
+      <div class="bar-sig">*** p&lt;.01</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">Two-Way FE</div>
+      <div class="bar-track"><div class="bar-fill" style="width:26.9%;background:#6a8fad">&minus;$132</div></div>
+      <div class="bar-sig">** p&lt;.05</div>
+    </div>
+  </div>
+  <p class="caption"><strong>Figure 1.</strong> Appropriations coefficient across key specifications, expressed as tuition increase per $1,000 cut in state funding. The preferred estimate (state FE) is highlighted.</p>
+</section>
+
+<section class="section fade-in" id="conclusion">
+  <div class="section-label">Section VI</div>
+  <h2>Conclusion</h2>
+  <p>The cost-shifting hypothesis is confirmed across all nine specifications estimated in this study. The magnitude of the effect ranges from approximately 13 cents (two-way fixed effects, most conservative) to 49 cents (pooled OLS) per dollar cut in state appropriations, with the preferred state fixed effects specification yielding an estimate of <strong>25 cents per dollar</strong>&mdash;meaning roughly one quarter of every funding cut is passed through to students as higher tuition.</p>
+  <p>Per capita personal income emerged as the single strongest predictor of tuition levels, suggesting that states effectively charge what families can afford. The unemployment rate, which appeared significant in simpler specifications, lost its explanatory power once income was controlled for&mdash;indicating its earlier significance was driven by omitted variable bias.</p>
+  <p>These findings carry implications for higher education policy. State legislatures considering cuts to university funding should recognize that a meaningful share of those reductions will be absorbed by students and their families through higher tuition. Conversely, reinvestments in per-student appropriations can be expected to provide measurable tuition relief. The consistency of these results across multiple econometric frameworks underscores the robustness of the cost-shifting relationship as a structural feature of American public higher education finance.</p>
+</section>
+
+<section class="section fade-in" id="references">
+  <div class="section-label">Section VII</div>
+  <h2>Data Sources and References</h2>
+  <ol class="ref-list">
+    <li>State Higher Education Executive Officers Association (SHEEO). State Higher Education Finance (SHEF) Report, FY 2024. <a href="https://shef.sheeo.org/data-downloads/">shef.sheeo.org</a></li>
+    <li>Federal Reserve Economic Data (FRED). State Unemployment Rates, Bureau of Labor Statistics. <a href="https://fred.stlouisfed.org">fred.stlouisfed.org</a></li>
+    <li>Bureau of Economic Analysis (BEA). Per Capita Personal Income by State. <a href="https://www.bea.gov">bea.gov</a></li>
+    <li>U.S. Census Bureau. State Population Estimates.</li>
+    <li>Webber, D. A. (2017). State divestment and tuition at public institutions. <em>Economics of Education Review</em>, 60, 1&ndash;4.</li>
+    <li>Bound, J., &amp; Turner, S. (2007). Cohort crowding: How resources affect collegiate attainment. <em>Journal of Public Economics</em>, 91(5&ndash;6), 877&ndash;899.</li>
+  </ol>
+</section>
+
+<footer class="footer">
+  &copy; 2026 Robert J. Haldeman
+</footer>
+
+<script>
+const obs = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}
+  })
+},{threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
